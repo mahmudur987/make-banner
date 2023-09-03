@@ -15,17 +15,17 @@ const Canvas: React.FC<CanvasProps> = ({ bannerInfo }) => {
     text,
     textBackground,
     textFontSize,
-    textFontColor,
     borderRadius,
     bordercolor,
     borderwidth,
   } = bannerInfo;
 
-  console.log(textBackground);
-
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
+    if (!bannerInfo) {
+      return;
+    }
     const canvas = canvasRef.current;
 
     if (!canvas) {
@@ -67,6 +67,7 @@ const Canvas: React.FC<CanvasProps> = ({ bannerInfo }) => {
     Y,
     textBackground,
     textFontSize,
+    bannerInfo,
   ]);
 
   return (

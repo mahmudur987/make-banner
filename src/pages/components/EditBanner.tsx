@@ -1,17 +1,19 @@
 import React from "react";
 
 const EditBanner = ({ editInfo }: any) => {
+  if (!editInfo) {
+    return;
+  }
+
   const {
     setImageUrl,
     setImageHeight,
     setImagewidth,
     setX,
     setY,
-
     setText,
     setTextbackground,
     setTextFontSize,
-    setTextFontColor,
     setborderRadius,
     setbordercolor,
     setborderwidth,
@@ -42,11 +44,9 @@ const EditBanner = ({ editInfo }: any) => {
             onChange={(e) => setImagewidth(e.target.value)}
             className="select select-bordered  "
           >
-            <option value={1600} selected>
-              1600
-            </option>
+            <option defaultChecked>1600</option>
 
-            <option value={1024}>1080</option>
+            <option>1080</option>
           </select>
         </div>
 
@@ -58,11 +58,9 @@ const EditBanner = ({ editInfo }: any) => {
             onChange={(e) => setImageHeight(e.target.value)}
             className="select select-bordered  "
           >
-            <option value={900} selected>
-              900
-            </option>
-            <option value={1080}>1080</option>
-            <option value={1920}>1920</option>
+            <option defaultChecked>900</option>
+            <option>1080</option>
+            <option>1920</option>
           </select>
         </div>
       </div>

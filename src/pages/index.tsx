@@ -1,8 +1,6 @@
 // pages/CanvasPage.tsx
 import { useState } from "react";
 import Canvas from "./components/Canvas";
-
-import img2 from "../../public/assets/image2.jpg";
 import SaveBanner from "./components/SaveBanner";
 import EditBanner from "./components/EditBanner";
 const Home: React.FC = () => {
