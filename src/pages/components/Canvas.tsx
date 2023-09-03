@@ -85,7 +85,6 @@ const Canvas: React.FC<CanvasProps> = ({ bannerInfo }) => {
   ]);
 
   return (
-    <div className=" min-w-[800px] w-full   ">
     <div className="min-w-[800px] w-full">
       <canvas
         style={{
