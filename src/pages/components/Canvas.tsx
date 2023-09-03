@@ -1,4 +1,3 @@
-// components/Canvas.tsx
 import React, { useEffect, useRef } from "react";
 
 interface CanvasProps {
@@ -20,24 +19,24 @@ interface CanvasProps {
 const Canvas: React.FC<CanvasProps> = ({ bannerInfo }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
-  const {
-    imageUrl,
-    X,
-    Y,
-    imageHeight,
-    imagewidth,
-    text,
-    textBackground,
-    textFontSize,
-    borderRadius,
-    bordercolor,
-    borderwidth,
-  } = bannerInfo;
-
   useEffect(() => {
-    if (!bannerInfo) {
-      return;
+    if (!bannerInfo || !bannerInfo.imageUrl) {
+      return; // Or render a loading state or fallback content
     }
+
+    const {
+      imageUrl,
+      X,
+      Y,
+      imageHeight,
+      imagewidth,
+      text,
+      textBackground,
+      textFontSize,
+      borderRadius,
+      bordercolor,
+      borderwidth,
+    } = bannerInfo;
 
     const canvas = canvasRef.current;
 
@@ -52,58 +51,41 @@ const Canvas: React.FC<CanvasProps> = ({ bannerInfo }) => {
     }
 
     // Load and display the image from the public directory
-    if (bannerInfo) {
-      const image = new Image();
-      image.src = imageUrl;
-      image.onload = () => {
-        const aspectRatio = imagewidth / imageHeight;
-        const canvasWidth = canvas.width;
-        const ImageHeight = canvasWidth / aspectRatio;
-        canvas.height = ImageHeight;
-        ctx.drawImage(image, X, Y, canvas.width, ImageHeight);
+    const image = new Image();
+    image.src = imageUrl;
+    image.onload = () => {
+      const aspectRatio = imagewidth / imageHeight;
+      const canvasWidth = canvas.width;
+      const ImageHeight = canvasWidth / aspectRatio;
+      canvas.height = ImageHeight;
+      ctx.drawImage(image, X, Y, canvas.width, ImageHeight);
 
-        // Add text to the canvas
-        ctx.font = `${textFontSize}px sans-serif`;
+      // Add text to the canvas
+      ctx.font = `${textFontSize}px sans-serif`;
+      ctx.fillStyle = textBackground;
+      ctx.fillText(
+        text,
+        canvas.width / 5,
+        canvas.height / 3,
+        (canvas.width * 2) / 3
+      );
+    };
+  }, [bannerInfo]);
 
-        ctx.fillStyle = textBackground;
-        ctx.fillText(
-          text,
-          canvas.width / 5,
-          canvas.height / 3,
-          (canvas.width * 2) / 3
-        );
-      };
-    }
-  }, [
-    imageUrl,
-    text,
-    imageHeight,
-    imagewidth,
-    X,
-    Y,
-    textBackground,
-    textFontSize,
-    bannerInfo,
-  ]);
-  if (!bannerInfo || !bannerInfo.imageUrl) {
-    return null; // Or render a loading state or fallback content
-  }
-  if (bannerInfo) {
-    return (
-      <div className="min-w-[800px] w-full   ">
-        <canvas
-          style={{
-            border: `${borderwidth}px solid ${bordercolor} `,
-            borderRadius: `${borderRadius}px`,
-          }}
-          className="mx-auto"
-          ref={canvasRef}
-          width={800}
-          height={600}
-        />
-      </div>
-    );
-  }
+  return (
+    <div className="min-w-[800px] w-full">
+      <canvas
+        style={{
+          border: `${bannerInfo.borderwidth}px solid ${bannerInfo.bordercolor} `,
+          borderRadius: `${bannerInfo.borderRadius}px`,
+        }}
+        className="mx-auto"
+        ref={canvasRef}
+        width={800}
+        height={600}
+      />
+    </div>
+  );
 };
 
 export default Canvas;
