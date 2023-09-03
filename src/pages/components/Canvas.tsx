@@ -2,17 +2,17 @@ import React, { useEffect, useRef } from "react";
 
 interface CanvasProps {
   bannerInfo: {
-    imageUrl: string;
-    X: number;
-    Y: number;
-    imageHeight: number;
-    imagewidth: number;
-    text: string;
-    textBackground: string;
-    textFontSize: number;
-    borderRadius: number;
-    bordercolor: string;
-    borderwidth: number;
+    imageUrl?: string;
+    X?: number;
+    Y?: number;
+    imageHeight?: number;
+    imagewidth?: number;
+    text?: string;
+    textBackground?: string;
+    textFontSize?: number;
+    borderRadius?: number;
+    bordercolor?: string;
+    borderwidth?: number;
   };
 }
 
@@ -76,8 +76,10 @@ const Canvas: React.FC<CanvasProps> = ({ bannerInfo }) => {
     <div className="min-w-[800px] w-full">
       <canvas
         style={{
-          border: `${bannerInfo.borderwidth}px solid ${bannerInfo.bordercolor} `,
-          borderRadius: `${bannerInfo.borderRadius}px`,
+          border: `${bannerInfo?.borderwidth}px solid ${
+            bannerInfo?.bordercolor ?? "white"
+          } `,
+          borderRadius: `${bannerInfo?.borderRadius ?? 0}px`,
         }}
         className="mx-auto"
         ref={canvasRef}
