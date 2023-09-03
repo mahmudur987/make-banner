@@ -7,13 +7,13 @@ interface CanvasProps {
     X: number;
     Y: number;
     imageHeight: number;
-    imageWidth: number; // Corrected variable name to match the interface
+    imagewidth: number;
     text: string;
     textBackground: string;
     textFontSize: number;
     borderRadius: number;
-    borderColor: string; // Corrected variable name to match the interface
-    borderWidth: number;
+    bordercolor: string;
+    borderwidth: number;
   };
 }
 
@@ -23,21 +23,22 @@ const Canvas: React.FC<CanvasProps> = ({ bannerInfo }) => {
     X,
     Y,
     imageHeight,
-    imageWidth,
+    imagewidth,
     text,
     textBackground,
     textFontSize,
     borderRadius,
-    borderColor,
-    borderWidth,
+    bordercolor,
+    borderwidth,
   } = bannerInfo;
-  console.log(imageUrl);
+
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
     if (!bannerInfo) {
       return;
     }
+
     const canvas = canvasRef.current;
 
     if (!canvas) {
@@ -49,16 +50,17 @@ const Canvas: React.FC<CanvasProps> = ({ bannerInfo }) => {
     if (!ctx) {
       return;
     }
+
     // Load and display the image from the public directory
     if (bannerInfo) {
       const image = new Image();
       image.src = imageUrl;
       image.onload = () => {
-        const aspectRatio = imageWidth / imageHeight; // Corrected variable names
+        const aspectRatio = imagewidth / imageHeight;
         const canvasWidth = canvas.width;
-        const canvasHeight = canvasWidth / aspectRatio; // Corrected variable name
-        canvas.height = canvasHeight;
-        ctx.drawImage(image, X, Y, canvasWidth, canvasHeight);
+        const ImageHeight = canvasWidth / aspectRatio;
+        canvas.height = ImageHeight;
+        ctx.drawImage(image, X, Y, canvas.width, ImageHeight);
 
         // Add text to the canvas
         ctx.font = `${textFontSize}px sans-serif`;
@@ -66,9 +68,9 @@ const Canvas: React.FC<CanvasProps> = ({ bannerInfo }) => {
         ctx.fillStyle = textBackground;
         ctx.fillText(
           text,
-          canvasWidth / 5,
-          canvasHeight / 3,
-          (canvasWidth * 2) / 3
+          canvas.width / 5,
+          canvas.height / 3,
+          (canvas.width * 2) / 3
         );
       };
     }
@@ -76,7 +78,7 @@ const Canvas: React.FC<CanvasProps> = ({ bannerInfo }) => {
     imageUrl,
     text,
     imageHeight,
-    imageWidth,
+    imagewidth,
     X,
     Y,
     textBackground,
@@ -85,10 +87,10 @@ const Canvas: React.FC<CanvasProps> = ({ bannerInfo }) => {
   ]);
 
   return (
-    <div className="min-w-[800px] w-full">
+    <div className="min-w-[800px] w-full   ">
       <canvas
         style={{
-          border: `${borderWidth}px solid ${borderColor}`,
+          border: `${borderwidth}px solid ${bordercolor} `,
           borderRadius: `${borderRadius}px`,
         }}
         className="mx-auto"
