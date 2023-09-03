@@ -85,7 +85,9 @@ const Canvas: React.FC<CanvasProps> = ({ bannerInfo }) => {
     textFontSize,
     bannerInfo,
   ]);
-
+  if (!bannerInfo || !bannerInfo.imageUrl) {
+    return null; // Or render a loading state or fallback content
+  }
   return (
     <div className="min-w-[800px] w-full   ">
       <canvas
