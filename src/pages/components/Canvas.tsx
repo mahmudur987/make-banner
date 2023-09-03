@@ -2,14 +2,14 @@ import React, { useEffect, useRef } from "react";
 
 interface CanvasProps {
   bannerInfo: {
-    imageUrl?: string;
-    X?: number;
-    Y?: number;
-    imageHeight?: number;
-    imagewidth?: number;
-    text?: string;
-    textBackground?: string;
-    textFontSize?: number;
+    imageUrl: string;
+    X: number;
+    Y: number;
+    imageHeight: number;
+    imagewidth: number;
+    text: string;
+    textBackground: string;
+    textFontSize: number;
     borderRadius?: number;
     bordercolor?: string;
     borderwidth?: number;
@@ -20,27 +20,19 @@ const Canvas: React.FC<CanvasProps> = ({ bannerInfo }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
-    if (
-      !bannerInfo ||
-      !bannerInfo.imageUrl ||
-      bannerInfo.imagewidth === undefined ||
-      bannerInfo.imageHeight === undefined
-    ) {
+    if (!bannerInfo || !bannerInfo.imageUrl) {
       return; // Or render a loading state or fallback content
     }
 
     const {
       imageUrl,
-      X,
-      Y,
+      X = 0,
+      Y = 0,
       imageHeight,
       imagewidth,
       text,
       textBackground,
       textFontSize,
-      borderRadius,
-      bordercolor,
-      borderwidth,
     } = bannerInfo;
 
     const canvas = canvasRef.current;
