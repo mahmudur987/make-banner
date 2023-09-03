@@ -50,26 +50,28 @@ const Canvas: React.FC<CanvasProps> = ({ bannerInfo }) => {
       return;
     }
     // Load and display the image from the public directory
-    const image = new Image();
-    image.src = imageUrl;
-    image.onload = () => {
-      const aspectRatio = imagewidth / imageHeight;
-      const canvasWidth = canvas.width;
-      const ImageHeight = canvasWidth / aspectRatio;
-      canvas.height = ImageHeight;
-      ctx.drawImage(image, X, Y, canvas.width, ImageHeight);
+    if (bannerInfo) {
+      const image = new Image();
+      image.src = imageUrl;
+      image.onload = () => {
+        const aspectRatio = imagewidth / imageHeight;
+        const canvasWidth = canvas.width;
+        const ImageHeight = canvasWidth / aspectRatio;
+        canvas.height = ImageHeight;
+        ctx.drawImage(image, X, Y, canvas.width, ImageHeight);
 
-      // Add text to the canvas
-      ctx.font = `${textFontSize}px sans-serif`;
+        // Add text to the canvas
+        ctx.font = `${textFontSize}px sans-serif`;
 
-      ctx.fillStyle = textBackground;
-      ctx.fillText(
-        text,
-        canvas.width / 5,
-        canvas.height / 3,
-        (canvas.width * 2) / 3
-      );
-    };
+        ctx.fillStyle = textBackground;
+        ctx.fillText(
+          text,
+          canvas.width / 5,
+          canvas.height / 3,
+          (canvas.width * 2) / 3
+        );
+      };
+    }
   }, [
     imageUrl,
     text,
