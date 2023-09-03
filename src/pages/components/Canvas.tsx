@@ -20,7 +20,12 @@ const Canvas: React.FC<CanvasProps> = ({ bannerInfo }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
-    if (!bannerInfo || !bannerInfo.imageUrl) {
+    if (
+      !bannerInfo ||
+      !bannerInfo.imageUrl ||
+      bannerInfo.imagewidth === undefined ||
+      bannerInfo.imageHeight === undefined
+    ) {
       return; // Or render a loading state or fallback content
     }
 
