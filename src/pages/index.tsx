@@ -4,7 +4,7 @@ import Canvas from "./components/Canvas";
 import SaveBanner from "./components/SaveBanner";
 import EditBanner from "./components/EditBanner";
 const Home: React.FC = () => {
-  const [imageUrl, setImageUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState("image");
   const [X, setX] = useState(0);
   const [Y, setY] = useState(0);
   const [imageHeight, setImageHeight] = useState(900);

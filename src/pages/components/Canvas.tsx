@@ -2,7 +2,19 @@
 import React, { useEffect, useRef } from "react";
 
 interface CanvasProps {
-  bannerInfo: any;
+  bannerInfo: {
+    imageUrl: string;
+    X: number;
+    Y: number;
+    imageHeight: number;
+    imagewidth: number;
+    text: string;
+    textBackground: string;
+    textFontSize: number;
+    borderRadius: number;
+    bordercolor: string;
+    borderwidth: number;
+  };
 }
 
 const Canvas: React.FC<CanvasProps> = ({ bannerInfo }) => {
@@ -19,7 +31,7 @@ const Canvas: React.FC<CanvasProps> = ({ bannerInfo }) => {
     bordercolor,
     borderwidth,
   } = bannerInfo;
-
+  console.log(imageUrl);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
