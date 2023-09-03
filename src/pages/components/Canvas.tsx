@@ -88,20 +88,22 @@ const Canvas: React.FC<CanvasProps> = ({ bannerInfo }) => {
   if (!bannerInfo || !bannerInfo.imageUrl) {
     return null; // Or render a loading state or fallback content
   }
-  return (
-    <div className="min-w-[800px] w-full   ">
-      <canvas
-        style={{
-          border: `${borderwidth}px solid ${bordercolor} `,
-          borderRadius: `${borderRadius}px`,
-        }}
-        className="mx-auto"
-        ref={canvasRef}
-        width={800}
-        height={600}
-      />
-    </div>
-  );
+  if (bannerInfo) {
+    return (
+      <div className="min-w-[800px] w-full   ">
+        <canvas
+          style={{
+            border: `${borderwidth}px solid ${bordercolor} `,
+            borderRadius: `${borderRadius}px`,
+          }}
+          className="mx-auto"
+          ref={canvasRef}
+          width={800}
+          height={600}
+        />
+      </div>
+    );
+  }
 };
 
 export default Canvas;
