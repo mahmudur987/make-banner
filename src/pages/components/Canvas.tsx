@@ -18,6 +18,8 @@ interface CanvasProps {
 }
 
 const Canvas: React.FC<CanvasProps> = ({ bannerInfo }) => {
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+
   const {
     imageUrl,
     X,
@@ -31,8 +33,6 @@ const Canvas: React.FC<CanvasProps> = ({ bannerInfo }) => {
     bordercolor,
     borderwidth,
   } = bannerInfo;
-
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
     if (!bannerInfo) {
